@@ -1,4 +1,5 @@
 import pygame
+from mappa import *
 
 
 # pygame setup
@@ -11,6 +12,9 @@ dt = 0
 player_pos = pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2)
 a=60
 player_size = (30, 30)  # Dimensioni del rettangolo (larghezza, altezza)
+mappa=Mappa(1920,1080)
+mappa.creaMappa(screen)
+
 while running:
     # poll for events
     # pygame.QUIT event means the user clicked X to close your window
@@ -23,6 +27,8 @@ while running:
     
     rect=pygame.Rect(player_pos,player_size)
     pygame.draw.rect(screen,"orange",rect)
+
+    mappa.disegnaBordi(screen)
 
     keys = pygame.key.get_pressed()
     if keys[pygame.K_w]:
