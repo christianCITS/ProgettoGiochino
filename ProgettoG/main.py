@@ -26,6 +26,7 @@ player_size = (30, 30)  # Dimensioni del rettangolo (larghezza, altezza)
 mappa=Mappa(1920,1080)
 mappa.creaMappa(screen)
 
+
 while running:
 
     #qunado il gioco viene chiuso
@@ -73,9 +74,6 @@ while running:
             a=60
             
     dt=clock.tick(a)/1000
-    
-   
-
 
 pygame.quit()
 
