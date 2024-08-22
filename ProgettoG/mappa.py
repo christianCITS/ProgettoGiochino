@@ -18,15 +18,16 @@ class Mappa:
 
     def creaBordi(self):
         latoQuad=30
+        #lato sinistro
         for i in range(self.altezza// latoQuad):
             self.bordi.append(pygame.Rect(0,i*latoQuad,latoQuad,latoQuad))
-
+        #lato destro
         for i in range(self.altezza// latoQuad):
             self.bordi.append(pygame.Rect(self.larghezza-latoQuad,i*latoQuad,latoQuad,latoQuad))
-
+        #lato sopra
         for i in range(self.larghezza// latoQuad):
             self.bordi.append(pygame.Rect(i*latoQuad,0,latoQuad,latoQuad))
-        
+        #lato sotto 
         for i in range(self.larghezza// latoQuad):
             self.bordi.append(pygame.Rect(i*latoQuad,self.altezza-latoQuad,latoQuad,latoQuad))
 
