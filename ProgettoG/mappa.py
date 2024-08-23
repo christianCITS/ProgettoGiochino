@@ -13,9 +13,6 @@ class Mappa:
         self.disegnaBordi(screen)
     
 
-
-
-
     def creaBordi(self):
         latoQuad=30
         #lato sinistro
