@@ -2,24 +2,60 @@ import pygame
 import random
 from MELA import Mela
 from serpente import Serpente
-from mappa import *
+
+
+
+def singleton(cls):
+    instances = {}
+
+    def get_instance():
+        if cls not in instances:
+            instances[cls] = cls()
+        return instances[cls]
+
+    return get_instance
+
+
 
 
 class Game:
-    
-    def __new__(cls):
-        if not hasattr(cls, 'instance'):
-            cls.instance = super(Game, cls).__new__(cls)
-        return cls.instance
+
     
 
+
     def __init__(self):
-        self.mappa = Mappa(1920,1080)
+        #grandezza display
+        self.screen = pygame.display.set_mode((1920, 1080))
         self.mele = []
+        self.mappa=None
+    
+
+
+        
+
 
 
     def spawnabro(self):
-        mela = Mela(random.randint(self.mappa.larghezza-100,1500),random.randint(self.mappa.altezza-100,850))
+        mela = Mela(1000,500,20)
         self.mele.append(mela)
+
+
+
     
+    def startaGioco(self,mappa):
+        #crea fisicamente la mappa con gli attributi inseriti
+        self.mappa=mappa
+        self.mappa.creaMappa()
+        self.spawnabro()
+
+
+
     
+    def getMappa(self):
+        return self.mappa
+
+
+
+@singleton
+class GameSingleton(Game):
+    pass

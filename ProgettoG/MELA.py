@@ -1,18 +1,33 @@
 import pygame
+from game import *
 
 
 
 class Mela:
 
-    def __init__(self, x,y):
+    def __init__(self, x,y,raggio):
         self.y = y
         self.x = x
         self.faccia = 'MELADIMITRI.jpg'
+        self.immagine= pygame.image.load(self.faccia)
+        self.immagine= pygame.transform.scale(self.immagine, (2*raggio, 2*raggio))
+        self.raggio=raggio
+        self.forma=None
     
     
-    def creaDimitri(self):
-        a = pygame.draw.circle()
+    def creaDimitri(self,game):
+        a=pygame.draw.circle(game.screen, (0, 0, 0), (self.x, self.y), self.raggio)
+
+
+
+        rect = self.immagine.get_rect(center=(self.x, self.y))
+        game.screen.blit(self.immagine, rect)
     
+
+
+    
+
+
     
         
     

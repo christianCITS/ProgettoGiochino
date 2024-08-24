@@ -1,4 +1,5 @@
 import pygame
+from game import *
 
 class Mappa:
 
@@ -8,9 +9,9 @@ class Mappa:
         self.bordi=[]
 
     
-    def creaMappa(self,screen):
+    def creaMappa(self):
         self.creaBordi()
-        self.disegnaBordi(screen)
+        self.disegnaBordi()
     
 
     def creaBordi(self):
@@ -29,10 +30,16 @@ class Mappa:
             self.bordi.append(pygame.Rect(i*latoQuad,self.altezza-latoQuad,latoQuad,latoQuad))
 
     
-    def disegnaBordi(self,screen):
+    def disegnaBordi(self):
+            game=GameSingleton()
+            print(game)
             for rect in self.bordi:
-                pygame.draw.rect(screen,"black",rect)
+                pygame.draw.rect(game.screen,"black",rect)
+           
         
+    
+
+
 
 
 
