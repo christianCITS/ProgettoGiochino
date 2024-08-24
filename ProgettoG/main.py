@@ -105,7 +105,7 @@ while running:
     if destra:    
         player_pos.x += 50 * dt
     
-    #chiudere il gioc premenendo esc
+    #chiudere il gioco premenendo esc
     if keys[pygame.K_ESCAPE]:
         pygame.quit()
         
