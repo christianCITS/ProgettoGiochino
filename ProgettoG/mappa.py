@@ -34,7 +34,7 @@ class Mappa:
             game=GameSingleton()
             print(game)
             for rect in self.bordi:
-                pygame.draw.rect(game.screen,"black",rect)
+                pygame.draw.rect(game.screen,"red",rect)
            
         
     

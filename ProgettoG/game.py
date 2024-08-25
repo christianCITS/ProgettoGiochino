@@ -28,6 +28,12 @@ class Game:
         self.screen = pygame.display.set_mode((1920, 1080))
         self.mele = []
         self.mappa=None
+        self.serpente=None
+        self.font=None
+        self.testo=None
+        self.punteggio= 0
+        self.testopunteggio=None
+        
     
 
 
@@ -47,15 +53,28 @@ class Game:
         self.mappa=mappa
         self.mappa.creaMappa()
         self.spawnabro()
+        self.serpente=Serpente(850,540)
+        self.font=pygame.font.SysFont("Arial Narrow",20)
+        self.testo=self.font.render("Dimitri acciuffati = ",True,"black",None)
+        self.testopunteggio=self.font.render(f"{self.punteggio}",True,"black",None)
 
 
 
     
     def getMappa(self):
         return self.mappa
+    
+
+    def disegnaFont(self):
+        self.screen.blit(self.testo, (50, 50))  # Posizione del testo
+        self.screen.blit(self.testopunteggio, (180, 50))  # Posizione del punteggio
+        
 
 
 
 @singleton
 class GameSingleton(Game):
     pass
+
+
+

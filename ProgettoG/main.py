@@ -12,18 +12,18 @@ pygame.init()
 
 def tastoPremuto(keys):
     direzione_corrente=""
-    if keys[pygame.K_w]:
+    if keys[pygame.K_w] or keys[pygame.K_UP]:
         direzione_corrente = 'w'
-    elif keys[pygame.K_s]:
+    elif keys[pygame.K_s] or keys[pygame.K_DOWN]:
         direzione_corrente = 's'
-    elif keys[pygame.K_a]:
+    elif keys[pygame.K_a] or keys[pygame.K_LEFT]:
         direzione_corrente = 'a'
-    elif keys[pygame.K_d]:
+    elif keys[pygame.K_d] or keys[pygame.K_RIGHT]:
         direzione_corrente = 'd'
     return direzione_corrente
 
 
-#Inizzializza mappa
+#Inizializza mappa
 mappa=Mappa(1920,1080)
 clock = pygame.time.Clock()
 running = True
@@ -31,18 +31,12 @@ dt = 0
 game=GameSingleton()
 game.startaGioco(mappa)
 #posizione del giocatore
-print(game.screen)
 player_pos = pygame.Vector2(game.screen.get_width() / 2, game.screen.get_height() / 2)
 
 a=60
 player_size = (30, 30)  # Dimensioni del rettangolo (larghezza, altezza)
 
 
-
-destra=True
-sinistra=False
-su=False
-giu=False
 
 while running:
 
@@ -54,12 +48,7 @@ while running:
     #colore sfondo
     game.screen.fill("light blue")
     
-    #posizione giocatore
-    rect=pygame.Rect(player_pos,player_size)
-    
-    #personaggio che va cambiato
-    pygame.draw.rect(game.screen,"orange",rect)
-
+   
     #bordi visivi della mappa NO BLOCCO
     game.mappa.disegnaBordi()
     for mela in game.mele:
@@ -69,46 +58,14 @@ while running:
     #Spostamento quadrato futuro serpente
     keys = pygame.key.get_pressed()
     tasto=tastoPremuto(keys)
-    if tasto== 'w':
-        destra=False
-        sinistra=False
-        su=True
-        giu=False
 
-    if su:
-        player_pos.y -= 50 * dt
-
-    if tasto== 's':
-        destra=False
-        sinistra=False
-        su=False
-        giu=True
-
-    if giu:
-        player_pos.y += 50 * dt
-
-    if tasto== 'a':
-        destra=False
-        sinistra=True
-        su=False
-        giu=False
-
-    if sinistra:
-        player_pos.x -= 50 * dt
-
-    if tasto== 'd':
-        destra=True
-        sinistra=False
-        su=False
-        giu=False
-
-    if destra:    
-        player_pos.x += 50 * dt
-    
     #chiudere il gioco premenendo esc
     if keys[pygame.K_ESCAPE]:
         pygame.quit()
-        
+
+    game.disegnaFont()
+    game.serpente.muoviSerpente(tasto,dt)
+    game.serpente.disegnaSerp(game)
     
     
     # flip() the display to put your work on screen

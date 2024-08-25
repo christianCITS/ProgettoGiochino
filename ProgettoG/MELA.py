@@ -16,12 +16,17 @@ class Mela:
     
     
     def creaDimitri(self,game):
-        a=pygame.draw.circle(game.screen, (0, 0, 0), (self.x, self.y), self.raggio)
-
-
 
         rect = self.immagine.get_rect(center=(self.x, self.y))
         game.screen.blit(self.immagine, rect)
+
+
+
+    
+
+        
+
+        
     
 
 
