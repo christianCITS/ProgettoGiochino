@@ -13,12 +13,13 @@ class Mela:
         self.immagine= pygame.transform.scale(self.immagine, (2*raggio, 2*raggio))
         self.raggio=raggio
         self.forma=None
+        self.hitmela = self.immagine.get_rect(center=(self.x, self.y))
+
     
     
     def creaDimitri(self,game):
 
-        rect = self.immagine.get_rect(center=(self.x, self.y))
-        game.screen.blit(self.immagine, rect)
+        game.screen.blit(self.immagine, self.hitmela)
 
 
 

@@ -24,7 +24,7 @@ def tastoPremuto(keys):
 
 
 #Inizializza mappa
-mappa=Mappa(1920,1080)
+mappa=Mappa(800,500)
 clock = pygame.time.Clock()
 running = True
 dt = 0
@@ -32,6 +32,12 @@ game=GameSingleton()
 game.startaGioco(mappa)
 #posizione del giocatore
 player_pos = pygame.Vector2(game.screen.get_width() / 2, game.screen.get_height() / 2)
+font=pygame.font.SysFont("Arial Narrow",80)
+testo=font.render("GAME OVER",True,"black",None)
+font2=pygame.font.SysFont("Liberation Sans",50)
+
+
+
 
 a=60
 player_size = (30, 30)  # Dimensioni del rettangolo (larghezza, altezza)
@@ -39,34 +45,41 @@ player_size = (30, 30)  # Dimensioni del rettangolo (larghezza, altezza)
 
 
 while running:
-
-    #qunado il gioco viene chiuso
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-
-    #colore sfondo
-    game.screen.fill("light blue")
+    if not game.perso:
+        #riempe colore scelto sfondo
+        game.screen.fill("white")
+        
     
-   
-    #bordi visivi della mappa NO BLOCCO
-    game.mappa.disegnaBordi()
-    for mela in game.mele:
-        mela.creaDimitri(game)
-    
+        #bordi visivi della mappa NO BLOCCO
+        game.mappa.disegnaBordi()
+        
 
-    #Spostamento quadrato futuro serpente
-    keys = pygame.key.get_pressed()
-    tasto=tastoPremuto(keys)
+        #Spostamento quadrato futuro serpente
+        keys = pygame.key.get_pressed()
+        tasto=tastoPremuto(keys)
 
-    #chiudere il gioco premenendo esc
-    if keys[pygame.K_ESCAPE]:
-        pygame.quit()
+        #chiudere il gioco premenendo esc
+        if keys[pygame.K_ESCAPE]:
+            pygame.quit()
 
-    game.disegnaFont()
-    game.serpente.muoviSerpente(tasto,dt)
-    game.serpente.disegnaSerp(game)
-    
+        game.disegnaFont()
+        game.serpente.muoviSerpente(tasto,dt)
+        game.serpente.disegnaSerp(game)
+        game.serpente.checkCollisioni(game)
+        game.disegnaMele()
+    else:
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_ESCAPE]:
+            pygame.quit()
+
+        testostats=font2.render("Dimitri acciuffati = ",True,"black",None)
+        testopunteggio=font2.render(f"{game.punteggio}",True,"black",None)
+        game.screen.fill("red")
+        game.screen.blit(testo, (400, 250))  # Posizione del testo
+        game.screen.blit(testostats, (250, 400))  # Posizione del testo
+        game.screen.blit(testopunteggio, (720,400))  # Posizione del punteggio 
+        pygame.display.flip()
+        
     
     # flip() the display to put your work on screen
     pygame.display.flip()
@@ -77,7 +90,12 @@ while running:
             a=120
         elif a==120:
             a=60
-            
+    
+
+    for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+
     dt=clock.tick(a)/1000
 
 pygame.quit()
