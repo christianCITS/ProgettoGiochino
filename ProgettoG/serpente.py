@@ -2,6 +2,8 @@ import pygame
 from game import *
 from mappa import *
 from MELA import *
+from blocco import *
+
 
 class Serpente:
 
@@ -10,61 +12,37 @@ class Serpente:
         self.y = y
         self.grandezza = []
         #posizione giocatore
-        self.testa=pygame.Rect(x,y,30,30)
         self.destra=True
         self.sinistra=False
         self.su=False
         self.giu=False
+        self.testa=Blocco(self.x,self.y,self.destra,self.sinistra,self.su,self.giu)
         self.velocita=220
+        self.grandezza.append(self.testa)
+
     
         
 
 
     def muoviSerpente(self,tasto,dt):
-        if tasto== 'w':
-            self.destra=False
-            self.sinistra=False
-            self.su=True
-            self.giu=False
-
-        if self.su:
-            self.y -= self.velocita * dt
-
-        if tasto== 's':
-            self.destra=False
-            self.sinistra=False
-            self.su=False
-            self.giu=True
-
-        if self.giu:
-            self.y += self.velocita * dt
-
-        if tasto== 'a':
-            self.destra=False
-            self.sinistra=True
-            self.su=False
-            self.giu=False
-
-        if self.sinistra:
-            self.x -= self.velocita * dt
-
-        if tasto== 'd':
-            self.destra=True
-            self.sinistra=False
-            self.su=False
-            self.giu=False
-
-        if self.destra:    
-            self.x += self.velocita * dt
+        self.grandezza[0].muoviBlocco(tasto,dt)
+        lunghezza_serp = len(self.grandezza)
         
+        for i in range(lunghezza_serp):
+            self.grandezza[lunghezza_serp - i].muoviBlocco(self.grandezza[lunghezza_serp - i].su,self.grandezza[lunghezza_serp - i].giu.self.grandezza[lunghezza_serp - i].destra,self.grandezza[lunghezza_serp - i].sinistra,self.grandezza[lunghezza_serp - i].velocita)
 
-        self.testa.update(self.x, self.y,30,30)
+            
+
+
+
+        
 
     def checkCollisioni(self,game):
         for mela in game.mele:
                 if  self.testa.colliderect(mela.hitmela):
-                    self.velocita+= 100
+                    self.velocita+= 20
                     game.aggiornaPunt(mela)
+
 
         for bordi in game.mappa.bordi:
             if self.testa.colliderect(bordi):
@@ -83,18 +61,23 @@ class Serpente:
 
 
     def disegnaSerp(self,game):
-
-        a=self.testa
-        print(self.testa)
-        pygame.draw.rect(game.screen,"black",a)
+        for blocco in self.grandezza:
+            blocco.disegnaBlocco(game)
 
 
-
+        
 
 
 
-    def collisioneDimitri(self):
+
+
+
+    def crescitaSerp(self):
         pass
+       
+
+
+        
 
 
 
