@@ -33,7 +33,6 @@ class Mappa:
     
     def disegnaBordi(self):
             game=GameSingleton()
-            print(game)
             for rect in self.bordi:
                 pygame.draw.rect(game.screen,"red",rect)
            

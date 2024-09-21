@@ -83,6 +83,7 @@ class Game:
         self.spawnabro()
         self.punteggio+=1
         self.testopunteggio=self.font.render(f"{self.punteggio}",True,"black",None)
+        self.serpente.crescitaSerp()
 
     
 
