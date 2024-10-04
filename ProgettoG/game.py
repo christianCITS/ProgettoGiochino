@@ -25,7 +25,7 @@ class Game:
 
     def __init__(self):
         #grandezza display
-        self.screen = pygame.display.set_mode((1920, 1080))
+        self.screen = pygame.display.set_mode((1080,750))
         self.mele = []
         self.mappa=None
         self.serpente=None

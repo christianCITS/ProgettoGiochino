@@ -24,7 +24,7 @@ def tastoPremuto(keys):
 
 
 #Inizializza mappa
-mappa=Mappa(1920,1080)
+mappa=Mappa(1080,750)
 clock = pygame.time.Clock()
 running = True
 dt = 0
