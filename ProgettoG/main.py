@@ -72,7 +72,7 @@ while running:
         if keys[pygame.K_ESCAPE]:
             pygame.quit()
 
-        testostats=font2.render("Dimitri acciuffati = ",True,"black",None)
+        testostats=font2.render("Mele acciuffate = ",True,"black",None)
         testopunteggio=font2.render(f"{game.punteggio}",True,"black",None)
         game.screen.fill("red")
         game.screen.blit(testo, (400, 250))  # Posizione del testo

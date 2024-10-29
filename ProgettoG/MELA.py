@@ -8,7 +8,7 @@ class Mela:
     def __init__(self, x,y,raggio):
         self.y = y
         self.x = x
-        self.faccia = 'MELADIMITRI.jpg'
+        self.faccia = 'mela.jpg'
         self.immagine= pygame.image.load(self.faccia)
         self.immagine= pygame.transform.scale(self.immagine, (2*raggio, 2*raggio))
         self.raggio=raggio
